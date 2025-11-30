@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Career Guidance Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+          font-family: 'Segoe UI', sans-serif;
+          background: linear-gradient(to right, #74ebd5, #ACB6E5);
+          margin: 0;
+          padding: 0;
+        }
+        header {
+          background: #2c3e50;
+          color: white;
+          padding: 30px;
+          text-align: center;
+        }
+        header h1 { margin: 0; font-size: 32px; }
+        header p { margin: 5px 0 0; font-size: 18px; font-style: italic; }
+
+        .container {
+          max-width: 900px;
+          margin: 40px auto;
+          background: white;
+          padding: 30px;
+          border-radius: 10px;
+          box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        h2 { text-align: center; color: #2c3e50; margin-bottom: 20px; }
+
+        .search-box { margin-bottom: 20px; position: relative; }
+
+        input[type="text"] {
+          width: 100%;
+          padding: 12px;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          font-size: 16px;
+        }
+
+        .suggestions {
+          position: absolute;
+          background: #fff;
+          border: 1px solid #ccc;
+          width: 100%;
+          max-height: 150px;
+          overflow-y: auto;
+          border-radius: 6px;
+          display: none;
+        }
+
+        .suggestions div {
+          padding: 10px;
+          cursor: pointer;
+        }
+        .suggestions div:hover { background: #f0f0f0; }
+
+        button {
+          width: 100%;
+          padding: 12px;
+          margin-top: 10px;
+          background: #3498db;
+          color: white;
+          border: none;
+          border-radius: 6px;
+          font-size: 18px;
+          cursor: pointer;
+        }
+        button:hover { background: #2980b9; }
+
+        .result {
+          margin-top: 30px;
+          padding: 20px;
+          background: #ecf0f1;
+          border-left: 5px solid #3498db;
+          border-radius: 6px;
+        }
+
+        .year-block {
+          margin-top: 10px;
+          padding: 10px;
+          background: white;
+          border-radius: 6px;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>📚 Career Guidance Portal</h1>
+    <p>"Your future is created by what you do today."</p>
+</header>
+
+<div class="container">
+    <h2>Find Your Career Path</h2>
+
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Type your stream (ex: CSE)">
+        <div id="suggestions" class="suggestions"></div>
+    </div>
+
+    <button id="submitBtn">Get Guidance</button>
+
+    <div id="results"></div>
+</div>
+
+<script>
+const input = document.getElementById("searchInput");
+const resultsBox = document.getElementById("results");
+
+async function loadCSV() {
+  try {
+    const response = await fetch("data/dataset.csv");
+    if (!response.ok) throw new Error("Network error: " + response.status);
+    const text = await response.text();
+    return parseCSV(text);
+  } catch (err) {
+    alert("CSV load failed: " + err.message);
+    return [];
+  }
+}
+
+function parseCSV(str) {
+  const rows = str.trim().split(/\r?\n/);
+  const headers = rows[0].split(",");
+  return rows.slice(1).map(row => {
+    const values = [];
+    let quotes = false, buffer = "";
+    for (const char of row) {
+      if (char === '"') quotes = !quotes;
+      else if (char === "," && !quotes) { values.push(buffer.trim()); buffer = ""; }
+      else buffer += char;
+    }
+    values.push(buffer.trim());
+    const obj = {};
+    headers.forEach((h, i) => (obj[h] = values[i]?.replace(/"/g, "")));
+    return obj;
+  });
+}
+
+document.getElementById("submitBtn").addEventListener("click", async () => {
+  const stream = input.value.trim().toUpperCase();
+  resultsBox.innerHTML = "";
+
+  if (!stream) { alert("Please enter a stream!"); return; }
+
+  const data = await loadCSV();
+  const rows = data.filter(r => r.Stream.toUpperCase() === stream);
+
+  if (rows.length === 0) {
+    resultsBox.innerHTML = `<div class="result"><h3>❌ Stream Not Found!</h3></div>`;
+    return;
+  }
+
+  let html = `
+    <div class="result">
+      <h3>🎓 Career Guidance for ${stream}</h3>
+      <p><b>Course Duration:</b> ${rows[0].CourseDuration}</p>
+  `;
+  rows.forEach(r => {
+    html += `
+      <div class="year-block">
+        <b>${r.Year}</b><br>
+        <b>Subjects:</b> ${r.Subjects}<br>
+        <b>Projects:</b> ${r.Projects}
+      </div>`;
+  });
+  html += `</div>`;
+  resultsBox.innerHTML = html;
+});
+</script>
+
+
+</body>
+</html>

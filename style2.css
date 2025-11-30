@@ -1,0 +1,31 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+main{
+    margin-top: 10vmin;
+    padding-top: 10vmin;
+    padding: 3vmin;
+}
+main h2{
+    color: aliceblue;
+    font-size: 7vmin;
+    text-align: center;
+    margin-top: 10px;
+    text-shadow: 1px 1px 1px black;
+    margin-bottom: 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+main p{
+    color: rgb(253, 177, 91);
+    font-size: 4vmin;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+main li{
+    color: rgb(203, 162, 114);
+    font-size: 4vmin;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
