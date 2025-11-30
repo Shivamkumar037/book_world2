@@ -7,39 +7,102 @@
     <title>Storys</title>
 
     <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
+    body{
+        font-family: Arial, Helvetica, sans-serif;
     }
+
     .upload-box {
       border: 2px dashed #3498db;
-      padding: 20px;
-      border-radius: 8px;
-      max-width: 400px;
-      
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+      background: #f9f9f9;
+      box-shadow: 0px 0px 12px rgba(0,0,0,0.1);
     }
+
+    .upload-box h2{
+        margin-bottom: 15px;
+        color: #2c3e50;
+        font-size: 26px;
+    }
+
+    form label{
+        font-weight: 600;
+        font-size: 16px;
+        display: block;
+        color: #34495e;
+        margin-bottom: 8px;
+        text-align: left;
+    }
+
+    input[type="text"]{
+        width: 100%;
+        padding: 12px;
+        border: 1.5px solid #3498db;
+        border-radius: 6px;
+        font-size: 15px;
+        margin-bottom: 15px;
+        outline: none;
+        transition: 0.3s;
+    }
+    input[type="text"]:focus{
+        border-color: #2980b9;
+        box-shadow: 0 0 5px rgba(41,128,185,0.5);
+    }
+
     input[type="file"] {
-      margin: 10px 0;
+      width: 100%;
+      padding: 12px;
+      border: 1.5px solid #3498db;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      background: white;
+      cursor: pointer;
     }
+
     #fileName {
       margin-top: 10px;
       font-weight: bold;
       color: #2c3e50;
     }
+
     button {
-      padding: 10px 20px;
+      margin-top: 15px;
+      padding: 12px 25px;
       background: #3498db;
       color: white;
       border: none;
-      border-radius: 6px;
+      font-size: 16px;
+      letter-spacing: 1px;
+      border-radius: 8px;
       cursor: pointer;
+      width: 100%;
+      transition: 0.3s;
     }
+
     button:hover {
       background: #2980b9;
     }
+
     .books-content{
         display: flex;
         justify-content: center;
+        align-items: center;
+        padding: 30px;
+    }
+
+    /* Main title */
+    .books-main h1{
+        text-align: center;
+        font-size: 35px;
+        margin-top: 30px;
+        color: #2c3e50;
+    }
+    #h1{
+      color: whitesmoke;
+      font-family: Arial, Helvetica, sans-serif;
     }
   </style>
 
@@ -49,13 +112,12 @@
             <div id="home" class="nav-bar">
                 <div class="logo-box">
                     <div style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrC4ixjDWCz-wNStdhP4MqCZ-kunLWbW3Vwg&s');" class="logo"></div>
-                    <p " class="logo-name">Book World</p>
+                    <p class="logo-name">Book World</p>
                 </div>
                 <div class="nav-links">
                     <ul>
                      <a href="https://shivamkumar037.github.io/myportfolio/"><li id="li3"> About Us</li></a>
-                       <a href="home.html"><li id="li5">HOME</li></a>
-
+                     <a href="home.html"><li id="li5">HOME</li></a>
                     </ul>
                 </div>
             </div>
@@ -63,72 +125,38 @@
 
     <main>
         <div class="books-main">
-            <h1>upload file 
+            <h1 id="h1">Upload Notes</h1>
 
-            </h1>
             <div class="books-content">
 
                  <div class="upload-box">
-    <h2>Upload a File</h2>
-    <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
-        <label for=""> File Name</label>
-        <input type="text">
-      <input type="file" id="fileInput" name="file" required>
-      <div id="fileName">No file chosen</div>
-      <button type="submit">Submit</button>
-    </form>
-  </div>
+                    <h2>Upload Your File</h2>
+                    <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+                        <label>File Name</label>
+                        <input type="text" placeholder="Enter file name...">
+
+                        <label>Select File</label>
+                        <input type="file" id="fileInput" name="file" required>
+
+                        <div id="fileName">No file chosen</div>
+                        <button type="submit">Submit</button>
+                    </form>
+                 </div>
 
         </div>
     </main>
+
     <footer>
         <div class="footer-content">
             <div class="logo-library">
                 <div style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrC4ixjDWCz-wNStdhP4MqCZ-kunLWbW3Vwg&s');"
                     class="logo-again logo"></div>
 
-                <h3 class="logo-name-again "> Book Words Library</h3>
+                <h3 class="logo-name-again">Book Words Library</h3>
             </div>
-        </div>
-        <div class="footer-about-content">
-            <div class="quick-link">
-                <h3 class="quick-links-name">Quick Links</h3>
-                <ul>
-                    <a href="#home">
-                       <a href="home.html"> <li>Home</li></a>
-                    </a>
-                 <a href="https://www.instagram.com/shivam_kumar037s/?igsh=MTh1ejg5bTN2cm1xdQ%3D%3D#">   <li>Contact Us</li></a>
-                   <a href="term&condition.html"> <li>Terms & Conditions</li></a>
-                </ul>
-            </div>
-            <div class="library">
-                <h3 class="quick-links-name">Library</h3>
-                <ul>
-                   <a href="courses.html"> <li>Browse Categories</li></a>
-                    <a href="poetry.html"><li>New Arrivals</li></a>
-                   <a href="programing.html"> <li>Popular Books</li></a>
-                </ul>
-            </div>
-            <div class="contact-us">
-                <h3> Contact Us</h3>
-                <ul>
-                    <li><b style="color: aliceblue;">Gmail Id :-</b>shivamkumar37je@gmail.com</li>
-                    <li><a
-                            href="https://www.instagram.com/shivam_kumar037s/?igsh=MTh1ejg5bTN2cm1xdQ%3D%3D#">Instagram</a>
-                    </li>
-                    <li><a href="https://www.linkedin.com/in/shivam-kumar-347473310/">Linked In</a></li>
-                    <li><a href="https://x.com/shivamkumar_037?t=mHHtysEHzvDyNfgMSiFUkQ&s=09">Twitter</a></li>
-                    <li><a
-                            href="https://www.facebook.com/people/MOJ-S-INDIA/100089460067596/?rdid=I8393CnNzLPEEkFh&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1FJjonpnrs%2F">Facebook</a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-        <div class="footer-copy">
-            <p>&copy;  2025 B World. All Rights Reserved. <br> &hearts; Develop by Shivam Kumar </p>
         </div>
     </footer>
+
       <script>
     const fileInput = document.getElementById("fileInput");
     const fileName = document.getElementById("fileName");
@@ -144,4 +172,3 @@
 
 </body>
 </html>
-
